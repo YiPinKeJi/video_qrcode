@@ -14,9 +14,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "html2canvas": "^1.0.0-rc.5",
     "vue": "^2.5.2",
     "vue-qr": "^2.2.1",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuescroll": "^4.15.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

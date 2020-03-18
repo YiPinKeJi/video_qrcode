@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/pages/main'
 import Qrcode from '@/pages/qrcode'
+import Voucher from '@/pages/voucher'
 
 Vue.use(Router)
 
@@ -15,6 +16,10 @@ export default new Router({
       path: '/main',
       name: 'Main',
       component: Main
+    },{
+      path: '/voucher',
+      name: 'voucher',
+      component: Voucher
     }
   ]
 })
