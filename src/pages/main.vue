@@ -1,15 +1,16 @@
 <template>
   <div>
     <div class="div-video">
-      <video id="video" controls src="../../static/test.mp4" poster="../../static/1584432576(1).jpg"
-             x5-playsinline></video>
+      <video id="video" controls :src="videoData[0].src" poster="../../static/1584432576(1).jpg"
+             x5-playsinline :playsinline = "true"></video>
     </div>
     <div class="div-title">
+      <img class="menu" src="../assets/menu.png">
       <div class="title">
         课程章节
       </div>
     </div>
-    <div class="div-item" v-for="item of videoData" :key="item">
+    <div class="div-item" v-for="item of videoData" :key="item" @click="playVideo(item)">
       <div class="item">
         <div class="number">{{item.num}}</div>
         <div class="div-text">
@@ -39,18 +40,21 @@
         videoData: [{
           num: "01",
           title: "预防接种的重要性",
+          src: require("../../static/video1.mp4"),
           time: "04分39秒",
           state: "未完成",
         },
           {
             num: "02",
             title: "接种疫苗注意事项",
+            src: require("../../static/video2.mp4"),
             time: "04分54秒",
             state: "未完成",
           },
           {
             num: "03",
             title: "疫苗可以延迟接种吗",
+            src: require("../../static/video3.mp4"),
             time: "03分20秒",
             state: "已完成",
           }
@@ -62,7 +66,13 @@
       buildVoucher() {
         this.$router.push({path: '/voucher'});
       },
-
+      playVideo(item) {
+        var myVideoBtn = document.getElementById("video");
+        if (item.src != myVideoBtn.src) {
+          myVideoBtn.src = item.src;
+          myVideoBtn.play();
+        }
+      }
     },
     mounted() {
       var resetTime = 0; // 拖动后重置播放时间
@@ -104,11 +114,26 @@
 <style>
   * {
     font-size: 14px;
+    color: #34B2B7;
+  }
+
+  .div-video {
+    object-fit: fill;
+    padding: 0px;
+    height: 200px;
+    background: #eeeeee;
+  }
+
+  .menu {
+    width: 18px;
+    height: 18px;
+    margin: auto 10px 15px 20px;
   }
 
   #video {
     width: 100%;
     object-fit: fill;
+    height: 200px;
     background-color: #34B2B7;
     color: #34B2B7;
     padding: 0px;
@@ -118,22 +143,25 @@
   .div-title {
     padding: 0px;
     margin: 0px;
+    display: flex;
+    text-align: center;
+    background-color: #eeeeee;
+
   }
 
   .title {
     font-size: 14px;
-    height: 50px;
-    background-color: #eeeeee;
-    line-height: 50px;
+    height: 45px;
+    line-height: 45px;
     text-align: left;
-    padding-left: 30px;
+    color: gray;
   }
 
   .number {
-    width: 20px;
-    height: 18px;
+    width: 18px;
+    height: 15px;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
     padding: 5px;
     border-radius: 50%;
@@ -169,6 +197,7 @@
 
   .brief {
     font-size: 12px;
+    padding-top: 5px;
     color: gray;
   }
 
@@ -186,17 +215,6 @@
     background-color: #d7e7e6;
     height: 1px;
     margin: 0px;
-  }
-
-  .video-title {
-    background-color: white;
-    font-size: 14px;
-    height: 50px;
-    line-height: 50px;
-    border-bottom-color: #eeeeee;
-    border-bottom-width: 1px;
-    text-align: left;
-    padding-left: 30px;
   }
 
   .button {
