@@ -1,13 +1,14 @@
 <template>
   <div class="content">
-    <img class="div0" src="../../static/banner_1.jpg">
+    <img class="div0" src="../../static/bg.png">
     <div class="div1">恭喜您</div>
     <div class="div2">已看完《疫苗接种》所有课程</div>
-    <div class="div3">听课凭证：XAWK000001</div>
-    <div class="div4">
-      <div class="back">返回视频</div>
-      <div class="save" @click="savecanvas">保存凭证</div>
-    </div>
+    <div class="div3">听课凭证：{{voucherCode}}</div>
+    <div class="lineHr"></div>
+    <!--<div class="div4">-->
+    <!--<div class="back">返回视频</div>-->
+    <!--<div class="save" @click="savecanvas">保存凭证</div>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -17,7 +18,9 @@
 
   export default {
     data() {
-      return {}
+      return {
+        voucherCode: '',
+    }
     },
     methods: {
       savecanvas() {
@@ -47,9 +50,9 @@
         save_link.dispatchEvent(event);
       },
       getVoucher() {
-        getMaxOrder(queryParams).then(res => {
+        getMaxOrder().then(res => {
           if (res.code == 200) {
-
+            this.voucherCode = res.result.maxOrder;
           }
         });
       }
@@ -67,6 +70,7 @@
   .div0 {
     width: 100%;
     height: 200px;
+    object-fit: fill;
   }
 
   .div1 {
@@ -113,5 +117,12 @@
     border-radius: 5px;
     margin: 0 auto;
     color: white;
+  }
+
+  .lineHr {
+    background-color: #34B2B7;
+    height: 1px;
+    margin: 100px 20px 0px 20px;
+    padding: 0px;
   }
 </style>

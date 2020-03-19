@@ -7,7 +7,7 @@ let cancelSource = null;
 // var isOnline =  true
 promise.polyfill();
 
-axios.defaults.baseURL = window.publicSecurityConfig.remoteUrl;
+axios.defaults.baseURL = window.server.remoteUrl;
 axios.defaults.timeout = 120000; // 配置axios拦截请求和响应的设置, 请求超时时间
 axios.defaults.headers = {'Content-Type':'application/json;charset=UTF-8'};
 

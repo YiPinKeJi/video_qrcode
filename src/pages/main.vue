@@ -10,9 +10,9 @@
         课程章节
       </div>
     </div>
-    <div class="div-item" v-for="item of videoData" :key="item.id" @click="playVideo(item)">
+    <div class="div-item" v-for="(item, i) of videoData" :key="item.id" @click="playVideo(item)">
       <div class="item">
-        <div class="number">{{item.id}}</div>
+        <div class="number">{{"0"+(i+1)}}</div>
         <div class="div-text">
           <div class="text">{{item.name}}</div>
           <div class="brief">{{item.duration}}</div>
@@ -45,51 +45,19 @@
     },
     methods: {
       getVideo() {
-        const res = {
-          "code": 200,
-          "message": "成功",
-          "result": [
-            {
-              "id": 1,
-              "name": "预防接种的重要性",
-              "path": "http://192.168.1.236:8080/static/video1.mp4",
-              "coverurl": "../../static/1.jpg",
-              "duration": 279,
-              "finish": false,
-              "progress": 0
-            },
-            {
-              "id": 2,
-              "name": "接种疫苗注意事项",
-              "path": "http://192.168.1.236:8080/static/video2.mp4",
-              "coverurl": "../../static/1.jpg",
-              "duration": 294,
-              "finish": false,
-              "progress": 0
-            },
-            {
-              "id": 3,
-              "name": "疫苗可以延迟接种吗",
-              "path": "http://192.168.1.236:8080/static/video3.mp4",
-              "coverurl": "../../static/1.jpg",
-              "duration": 200,
-              "finish": false,
-              "progress": 0
+        const queryParams = {account: "admin"};
+        getVideoList(queryParams).then(res => {
+          if (res.code == 200) {
+            for (let i = 0; i < res.result.length; i++) {
+              res.result[i].duration = Math.floor(res.result[i].duration / 60) + "分" + Math.floor(res.result[i].duration % 60) + "秒";
+              res.result[i].path = window.file.remoteUrl + res.result[i].path;
+              res.result[i].coverurl = window.file.remoteUrl + res.result[i].coverurl;
             }
-          ]
-        };
-        for (let i = 0; i < res.result.length; i++) {
-          res.result[i].duration = Math.floor(res.result[i].duration / 60) + "分" + Math.floor(res.result[i].duration % 60) + "秒";
-        }
-
-        // const queryParams = {account: "admin"};
-        // getVideoList(queryParams).then(res => {
-        if (res.code == 200) {
-          this.videoData = res.result;
-          this.currentSrc = this.videoData[0].path;
-          this.currentPicture = this.videoData[0].coverurl;
-        }
-        // });
+            this.videoData = res.result;
+            this.currentSrc = this.videoData[0].path;
+            this.currentPicture = this.videoData[0].coverurl;
+          }
+        });
       },
       //播放视频
       playVideo(item) {
@@ -137,9 +105,9 @@
           localStorage.setItem('remTime', this.curTime);
         })
         //视频结束播放
-        let allFinish = true;
         let item;
         vd.addEventListener('ended', function () {
+          let allFinish = true;
           for (let i = 0; i < that.videoData.length; i++) {
             if (that.videoData[i].path == vd.src) {
               that.videoData[i].finish = true;
