@@ -12,30 +12,32 @@
 </template>
 
 <script>
+  import {getMaxOrder} from '@/api';
   import html2canvas from 'html2canvas';
+
   export default {
     data() {
       return {}
     },
-    methods:{
-      savecanvas(){
+    methods: {
+      savecanvas() {
         let canvas = document.querySelector('.content');
         let that = this;
-        html2canvas(canvas,{scale:2,logging:false,useCORS:true}).then(function(canvas) {
+        html2canvas(canvas, {scale: 2, logging: false, useCORS: true}).then(function (canvas) {
           let type = 'png';
           let imgData = canvas.toDataURL(type);
           // 照片格式处理
-          let _fixType = function(type) {
+          let _fixType = function (type) {
             type = type.toLowerCase().replace(/jpg/i, 'jpeg');
             let r = type.match(/png|jpeg|bmp|gif/)[0];
             return 'image/' + r;
           };
-          imgData = imgData.replace(_fixType(type),'image/octet-stream');
+          imgData = imgData.replace(_fixType(type), 'image/octet-stream');
           let filename = "UUSound" + '.' + type;
-          that.saveFile(imgData,filename);
+          that.saveFile(imgData, filename);
         });
       },
-      saveFile(data, filename){
+      saveFile(data, filename) {
         let save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
         save_link.href = data;
         save_link.download = filename;
@@ -43,7 +45,17 @@
         let event = document.createEvent('MouseEvents');
         event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
         save_link.dispatchEvent(event);
+      },
+      getVoucher() {
+        getMaxOrder(queryParams).then(res => {
+          if (res.code == 200) {
+
+          }
+        });
       }
+    },
+    mounted() {
+      this.getVoucher();
     }
   }
 </script>
