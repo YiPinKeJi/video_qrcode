@@ -18,9 +18,12 @@
           <div class="brief">{{item.duration}}</div>
         </div>
         <div class="div-state">
-          <img class="img-state"
-               :src="item.finish ? require('../assets/yes.png') : require('../assets/no.png')">
-          <div class="text-state">{{item.finish ? '已完成':'未完成'}}</div>
+          <img class="img-state" v-if="item.progress == 0" src="../assets/no.png">
+          <img class="img-state" v-else-if="item.progress == 100" src="../assets/yes.png">
+          <img class="img-state" v-else src="../assets/ing.png">
+          <div class="text-state" v-if="item.progress == 0">未完成</div>
+          <div class="text-state" v-else-if="item.progress == 100">已完成</div>
+          <div class="text-stateing" v-else>正在播放</div>
         </div>
       </div>
       <div class="line"></div>
@@ -77,12 +80,6 @@
         if (getCurTime > 0.1) {
           curTime = getCurTime;
           resetTime = getCurTime;
-          vd.addEventListener('play', function () {
-            setTimeout(function () {
-              vd.currentTime = getCurTime;
-              setInterval(timer, 100)
-            }, 2000)
-          })
         } else {
           vd.play();
           setInterval(timer, 100)
@@ -100,23 +97,37 @@
           this.curTime = curTime;
         }
 
+        //视频播放
+        vd.addEventListener('play', function () {
+          for (let i = 0; i < that.videoData.length; i++) {
+            if (that.videoData[i].path == vd.src) {
+              that.videoData[i].progress = 50;
+            } else {
+              if (that.videoData[i].progress != 100) {
+                that.videoData[i].progress = 0;
+              }
+            }
+          }
+        })
         //视频暂停
         vd.addEventListener('pause', function () {
           localStorage.setItem('remTime', this.curTime);
         })
         //视频结束播放
-        let item;
         vd.addEventListener('ended', function () {
+          let item;
           let allFinish = true;
           for (let i = 0; i < that.videoData.length; i++) {
             if (that.videoData[i].path == vd.src) {
-              that.videoData[i].finish = true;
+              that.videoData[i].progress = 100;
               //播放完自动播放一下个视频
               if (i < that.videoData.length - 1) {
-                item = that.videoData[i + 1];
+                if (that.videoData[i + 1].progress != 100) {
+                  item = that.videoData[i + 1];
+                }
               }
             }
-            if (!that.videoData[i].finish) {
+            if (that.videoData[i].progress) {
               allFinish = false;
             }
           }
@@ -252,6 +263,11 @@
 
   .text-state {
     color: gray;
+    font-size: 12px;
+  }
+
+  .text-stateing {
+    color: #34B2B7;
     font-size: 12px;
   }
 
