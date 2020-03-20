@@ -7,3 +7,5 @@ import {get, post} from '@/axios';
 export const getVideoList = (queryParams) => get('healthbaby/resource/account/admin', queryParams);
 
 export const getMaxOrder = () => get('healthbaby/maxorder', null);
+
+export const addCount = (queryParams) => get('healthbaby/resource/finish', queryParams);

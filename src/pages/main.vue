@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <div class="div-video">
       <video id="video" controls :src="currentSrc" :poster="currentPicture"
              x5-playsinline :playsinline="true"></video>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import {getVideoList} from '@/api';
+  import {getVideoList, addCount} from '@/api';
 
   export default {
     data() {
@@ -133,11 +133,19 @@
       //生成听课凭证
       buildVoucher(finish) {
         if (finish) {
+          this.addCount();
           this.$router.push({path: '/voucher'});
         } else {
           alert("您需要看完所有视频，才可生成凭证");
         }
       },
+      addCount() {
+        addCount().then(res => {
+          if (res.code == 200) {
+            this.$router.push({path: '/voucher'});
+          }
+        });
+      }
     },
     mounted() {
       this.getVideo();
@@ -146,6 +154,10 @@
   }
 </script>
 <style>
+  .main {
+    background-color: white;
+  }
+
   * {
     font-size: 14px;
     color: #34B2B7;
@@ -168,8 +180,6 @@
     width: 100%;
     object-fit: fill;
     height: 200px;
-    background-color: #34B2B7;
-    color: #34B2B7;
     padding: 0px;
     margin: 0px;
   }

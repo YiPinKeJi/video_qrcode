@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <img class="div0" src="../../static/bg.png">
+    <img class="div0" src="../assets/bg.png">
     <div class="div1">恭喜您</div>
     <div class="div2">已看完《疫苗接种》所有课程</div>
     <div class="div3">听课凭证：{{voucherCode}}</div>
@@ -90,33 +90,6 @@
     color: #34B2B7;
     font-weight: bold;
     margin-top: 50px;
-  }
-
-  .div4 {
-    display: flex;
-    text-align: center;
-    padding-top: 50px;
-    width: 100%;
-  }
-
-  .back {
-    font-size: 13px;
-    width: 80px;
-    line-height: 35px;
-    border-radius: 5px;
-    background-color: #cccccc;
-    color: #565656;
-    margin: 0 auto;
-  }
-
-  .save {
-    font-size: 13px;
-    width: 80px;
-    background-color: #34B2B7;
-    line-height: 35px;
-    border-radius: 5px;
-    margin: 0 auto;
-    color: white;
   }
 
   .lineHr {

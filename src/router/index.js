@@ -21,5 +21,6 @@ export default new Router({
       name: 'voucher',
       component: Voucher
     }
-  ]
+  ],
+  base: '/video/', // 打包项目根目录
 })
