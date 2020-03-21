@@ -22,7 +22,7 @@
           <img class="img-state" v-else-if="item.progress == 100" src="../assets/yes.png">
           <img class="img-state" v-else src="../assets/ing.png">
           <div class="text-state" v-if="item.progress == 0">未完成</div>
-          <div class="text-state" v-else-if="item.progress == 100">已完成</div>
+          <div class="text-stateing" v-else-if="item.progress == 100">已完成</div>
           <div class="text-stateing" v-else>正在播放</div>
         </div>
       </div>
@@ -87,7 +87,6 @@
 
         // 定时器
         function timer() {
-          console.log("time");
           curTime = vd.currentTime;
           let apartTime = curTime - resetTime;
           if (apartTime > 2) {
