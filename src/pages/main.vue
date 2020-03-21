@@ -72,30 +72,19 @@
       },
       //控制视频
       videoControl() {
-        const that = this;
-        let resetTime = 0; // 拖动后重置播放时间
-        let curTime = 0;  // 当前播放时间
         let vd = document.getElementById("video"); //获取video对象
-        let getCurTime = localStorage.getItem('remTime'); //获取本地存储
-        if (getCurTime > 0.1) {
-          curTime = getCurTime;
-          resetTime = getCurTime;
-        } else {
-          vd.play();
-          setInterval(timer, 100)
-        }
-
-        // 定时器
-        function timer() {
-          curTime = vd.currentTime;
-          let apartTime = curTime - resetTime;
-          if (apartTime > 2) {
-            vd.currentTime = resetTime;
-          } else {
-            resetTime = curTime;
+        // 禁止快进
+        const that = this;
+        //当前视频播放时间位置
+        let currentTime;
+        setInterval(function () {
+          //重置厚视频所谓时间位置
+          let resetTime = vd.currentTime
+          if (resetTime - currentTime > 2) {
+            vd.currentTime = currentTime
           }
-          this.curTime = curTime;
-        }
+          currentTime = vd.currentTime
+        }, 500);
 
         //视频播放
         vd.addEventListener('play', function () {
@@ -108,10 +97,6 @@
               }
             }
           }
-        })
-        //视频暂停
-        vd.addEventListener('pause', function () {
-          localStorage.setItem('remTime', this.curTime);
         })
         //视频结束播放
         vd.addEventListener('ended', function () {
@@ -144,17 +129,14 @@
       //生成听课凭证
       buildVoucher(finish) {
         if (finish) {
-          this.addCount();
+          addCountApi().then(res => {
+            if (res.code == 200) {
+              this.$router.push({path: '/voucher'});
+            }
+          });
         } else {
           alert("您需要看完所有视频，才可生成凭证");
         }
-      },
-      addCount() {
-        addCountApi().then(res => {
-          if (res.code == 200) {
-            this.$router.push({path: '/voucher'});
-          }
-        });
       }
     },
     mounted() {
