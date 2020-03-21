@@ -36,7 +36,7 @@
 </template>
 
 <script>
-  import {getVideoList, addCount} from '@/api';
+  import {getVideoList, addCountApi} from '@/api';
 
   export default {
     data() {
@@ -87,6 +87,7 @@
 
         // 定时器
         function timer() {
+          console.log("time");
           curTime = vd.currentTime;
           let apartTime = curTime - resetTime;
           if (apartTime > 2) {
@@ -127,7 +128,7 @@
                 }
               }
             }
-            if (that.videoData[i].progress) {
+            if (that.videoData[i].progress != 100) {
               allFinish = false;
             }
           }
@@ -145,13 +146,12 @@
       buildVoucher(finish) {
         if (finish) {
           this.addCount();
-          this.$router.push({path: '/voucher'});
         } else {
           alert("您需要看完所有视频，才可生成凭证");
         }
       },
       addCount() {
-        addCount().then(res => {
+        addCountApi().then(res => {
           if (res.code == 200) {
             this.$router.push({path: '/voucher'});
           }

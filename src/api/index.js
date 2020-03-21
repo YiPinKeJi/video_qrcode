@@ -8,4 +8,4 @@ export const getVideoList = (queryParams) => get('healthbaby/resource/account/ad
 
 export const getMaxOrder = () => get('healthbaby/maxorder', null);
 
-export const addCount = (queryParams) => get('healthbaby/resource/finish', queryParams);
+export const addCountApi = () => post('healthbaby/resource/finish', null);

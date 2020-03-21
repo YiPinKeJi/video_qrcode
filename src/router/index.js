@@ -10,13 +10,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'qrcode',
-      component: Qrcode
-    },{
-      path: '/main',
       name: 'Main',
       component: Main
-    },{
+    }, {
+      path: '/qrcode',
+      name: 'qrcode',
+      component: Qrcode
+    }, {
       path: '/voucher',
       name: 'voucher',
       component: Voucher
