@@ -29,7 +29,7 @@
 </script>
 <style>
   .qr_content {
-    background-color: #34B2B7;
+    background-color: #008d7c;
     height: 100%;
   }
 

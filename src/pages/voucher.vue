@@ -1,14 +1,12 @@
 <template>
-  <div class="content">
-    <img class="div0" src="../assets/bg.png">
+  <div class="vou_content">
+    <img class="div0" src="../assets/logo.png">
     <div class="div1">恭喜您</div>
-    <div class="div2">已看完《疫苗接种》所有课程</div>
-    <div class="div3">听课凭证：{{voucherCode}}</div>
-    <div class="lineHr"></div>
-    <!--<div class="div4">-->
-    <!--<div class="back">返回视频</div>-->
-    <!--<div class="save" @click="savecanvas">保存凭证</div>-->
-    <!--</div>-->
+    <div class="div2">已接受完<br/>"中国健康宝贝计划 "<br/>家长教育课堂</div>
+    <div class="div3">(疫苗接种知识)</div>
+    <div class="div4">听/课/凭/证</div>
+    <div class="div5">{{voucherCode}}</div>
+    <div class="div6">*听课凭证为您本阶段的学习证明<br/>请截图保存，必要时请出示</div>
   </div>
 </template>
 
@@ -19,7 +17,7 @@
     data() {
       return {
         voucherCode: '',
-    }
+      }
     },
     methods: {
       getVoucher() {
@@ -36,39 +34,57 @@
   }
 </script>
 <style>
-  .content {
+  .vou_content {
     text-align: center;
+    background-color: #008d7c;
+    color: white;
+    text-align: center;
+    height: 100%;
   }
 
   .div0 {
-    width: 100%;
-    height: 200px;
-    object-fit: fill;
+    width: 95px;
+    height: 100px;
+    margin: 50px 0px 10px 0px;
   }
 
   .div1 {
-    font-size: 30px;
-    color: #e7a241;
-    margin-top: 50px;
+    font-size: 40px;
+    font-style: oblique;
+    font-weight: bold;
+    font-family: "Britannic Bold";
   }
 
   .div2 {
+    font-style: italic;
+    font-size: 26px;
     margin-top: 20px;
-    font-size: 16px;
-    color: #34B2B7;
+    font-weight: bold;
   }
 
   .div3 {
-    font-size: 20px;
-    color: #34B2B7;
+    font-size: 22px;
     font-weight: bold;
-    margin-top: 50px;
   }
 
-  .lineHr {
-    background-color: #34B2B7;
-    height: 1px;
-    margin: 100px 20px 0px 20px;
-    padding: 0px;
+  .div4 {
+    font-size: 18px;
+    margin-top: 50px;
+    font-weight: bold;
   }
+
+  .div5 {
+    font-size: 22px;
+    width: 200px;
+    line-height: 40px;
+    color: black;
+    margin: 15px auto;
+    border: 1px solid white;
+  }
+
+  .div6 {
+    font-size: 12px;
+    margin: 10px auto;
+  }
+
 </style>

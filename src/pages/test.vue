@@ -36,7 +36,7 @@
 </template>
 
 <script>
-  import {getVideoList, addCountApi} from '@/api';
+  import {getVideoListTest, addCountApi} from '@/api';
 
   export default {
     data() {
@@ -48,7 +48,7 @@
     },
     methods: {
       getVideo() {
-        getVideoList().then(res => {
+        getVideoListTest().then(res => {
           if (res.code == 200) {
             for (let i = 0; i < res.result.length; i++) {
               res.result[i].duration = Math.floor(res.result[i].duration / 60) + "分" + Math.floor(res.result[i].duration % 60) + "秒";

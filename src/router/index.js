@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/pages/main'
+import Test from '@/pages/test'
 import Qrcode from '@/pages/qrcode'
 import Voucher from '@/pages/voucher'
 
@@ -12,7 +13,13 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: Main
-    }, {
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test
+    },
+    {
       path: '/qrcode',
       name: 'qrcode',
       component: Qrcode
