@@ -53,6 +53,7 @@
     font-style: oblique;
     font-weight: bold;
     font-family: "Britannic Bold";
+    color: white;
   }
 
   .div2 {
@@ -60,17 +61,20 @@
     font-size: 26px;
     margin-top: 20px;
     font-weight: bold;
+    color: white;
   }
 
   .div3 {
     font-size: 22px;
     font-weight: bold;
+    color: white;
   }
 
   .div4 {
     font-size: 18px;
     margin-top: 50px;
     font-weight: bold;
+    color: white;
   }
 
   .div5 {
@@ -85,6 +89,7 @@
   .div6 {
     font-size: 12px;
     margin: 10px auto;
+    color: white;
   }
 
 </style>
